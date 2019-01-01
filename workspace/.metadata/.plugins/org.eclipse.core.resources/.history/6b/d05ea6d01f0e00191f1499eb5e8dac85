@@ -295,7 +295,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
-	__NOP();
+	HAL_UART_Receive_IT(&huart2, UART2_rxBuffer, UART2_RXBUFFER_SIZE); // ready to receive from UART with interrupt
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {

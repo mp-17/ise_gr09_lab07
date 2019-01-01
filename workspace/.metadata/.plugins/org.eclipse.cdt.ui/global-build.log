@@ -1,6 +1,36 @@
-23:35:24 **** Incremental Build of configuration Debug for project reflexes_meter ****
+00:49:03 **** Incremental Build of configuration Debug for project reflexes_meter ****
 make all 
-make: Nothing to be done for 'all'.
-23:35:27 **** Incremental Build of configuration Debug for project reflexes_meter ****
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+/home/matteo/git/ise_gr09_lab07/reflexes_meter/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed="__attribute__((__packed__))"' -DUSE_HAL_DRIVER -DSTM32F401xE -I"/home/matteo/git/ise_gr09_lab07/reflexes_meter/Inc" -I"/home/matteo/git/ise_gr09_lab07/reflexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/home/matteo/git/ise_gr09_lab07/reflexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"/home/matteo/git/ise_gr09_lab07/reflexes_meter/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/home/matteo/git/ise_gr09_lab07/reflexes_meter/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Src/main.c:333:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+   sprintf(txBuf_tmp, "T%04X", cnt);
+           ^~~~~~~~~
+In file included from /home/matteo/git/ise_gr09_lab07/reflexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:48:0,
+                 from /home/matteo/git/ise_gr09_lab07/reflexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:45,
+                 from /home/matteo/git/ise_gr09_lab07/reflexes_meter/Inc/stm32f4xx_hal_conf.h:244,
+                 from /home/matteo/git/ise_gr09_lab07/reflexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from /home/matteo/git/ise_gr09_lab07/reflexes_meter/Inc/main.h:51,
+                 from ../Src/main.c:42:
+/home/matteo/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.17.0.201812190825/tools/compiler/arm-none-eabi/include/stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: reflexes_meter.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -specs=rdimon.specs -lc -lrdimon -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "reflexes_meter.elf" @"objects.list"   -lm
+Finished building target: reflexes_meter.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "reflexes_meter.elf" "reflexes_meter.hex"
+arm-none-eabi-size "reflexes_meter.elf"
+   text	   data	    bss	    dec	    hex	filename
+  12280	    132	   1908	  14320	   37f0	reflexes_meter.elf
+ 
+00:49:06 **** Incremental Build of configuration Debug for project reflexes_meter ****
 make all 
 make: Nothing to be done for 'all'.

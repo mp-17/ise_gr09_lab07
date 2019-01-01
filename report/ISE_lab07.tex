@@ -1,0 +1,63 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[english]{babel}
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{bm} %bold for math formulas
+\usepackage{amsfonts} %mathematical fields fonts
+\usepackage{float} %images held
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[table]{colortbl}
+\usepackage{multirow}
+\usepackage{siunitx}
+
+\title{Integrated Systems Architecture\\Lab session 2 Report}
+\author{Matteo Perotti (251453)\\Giuseppe Puletto ()\\Luca Romani ()\\Giuseppe Sarda (255648)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+	E' stato creato un sistema che si compone di due parti: un programma Python che viene eseguito da PC e un programma C caricato e fatto girare su scheda NUCLEO-F401RE. La comunicazione tra i due dispositivi avviene mediante un cavo USB che emula una seriale. 
+	Il debug è stato eseguito grazie alla modalità di SEMIHOSTING che ha permesso il reindirizzamento dello std-output dal processore ARM Cortex M4 passando per il debugger/loader ST-LINK fino al PC.
+\end{abstract}
+
+\section{Descrizione dell'algoritmo}
+Le specifiche sono disponibili nel documento "lab07.pdf". Di seguito verranno chiarite le specifiche non definite:
+\begin{enumerate}
+	\item Qualora venga inviato un comando di accensione LED mentre esso è già acceso, il comando viene considerato non valido e semplicemente ignorato. Stessa cosa se il comando chiede di spegnere un LED già spento.
+	\item E' necessario che dal PC i comandi arrivino nel formato corretto. Non devono essere inviati comandi più lunghi di due caratteri.
+	\item Per ottenere un risultato corretto è indispensabile non attendere per più di 65 secondi dopo l'accensione/spegnimento del LED prima di premere il pulsante.
+\end{enumerate}
+
+\section{Programma Python}
+
+\section{Programma C}
+	\subsection{CubeMX}
+		Grazie al software CubeMX è stato possibile ottenere fin dall'inizio una struttura consistente del programma in modo molto agevole. 
+		\paragraph{UART2} Dagli schematici è possibile vedere che il Cortex-M4 e l'ST-LINK sono collegati tramite seriale. Quest'ultima è collegata ai pins PA2 e PA3 del controllore principale. Dal manuale della scheda NUCLEO viene esplicitato come la seriale interessata sia USART2.
+		In CubeMX è stato quindi selezionata quest'ultima e le impostazioni sono state regolate da specifiche; in aggiunta è stata selezionata anche l'inizializzazione degli interrupts relativi. Questo serve per poter gestire in modo non-blocking la ricezione e la trasmissione.
+		\paragraph{TIM1} E' necessario contare con una risoluzione del millisecondo, ed il valore massimo esprimibile in tale unità di misura è 0xFFFF, ovvero 65,535 secondi. 
+		Dal reference manual del microcontrollore è possibile vedere che il timer TIM1 è collegato ad APB2. Da CubeMX si può impostare il clock relativo affinché sia di 42 MHz, e il timer affinché il prescaler lo faccia scendere ancora fino ad 1 kHz. In questo modo viene evitata la creazione di una funzione di conversione apposita per ottenere il tempo in millisecondi a partire dal contenuto del registro del timer: con queste impostazioni essi si equivalgono.
+		\paragraph{GPIO} Vengono usati il LED2 a disposizione dell'utente e il blue PushButton. Di quest'ultimo è importante attivare l'interrupt corrispondente allo stato di output asserito, ovvero al falling edge (si può ricavare dallo schematico che il pulsante cortocircuita a gnd il pin del microcontrollore).
+	\subsection{Clock settings}
+		Come già spiegato nel precedente paragrafo è stato modificato il clock che arriva ad APB2. Il prescaler relativo è stato messo a 4. Il main clock è 84 MHz, viene quindi diviso per 4 per poi essere moltiplicato per 2 ed arrivare ad APB2.
+	\subsection{Scrittura del programma}
+		Il programma utilizza funzioni messe a disposizione dall'HAL della ST. Gli interrupt di ricezione e trasmissione UART, insieme con quello del push-button, sono stati astratti con tre funzioni callback.
+		Per prima cosa sono definiti il buffer di trasmissione e ricezione (5 e 2 bytes rispettivamente).
+		
+		Prima del ciclo infinito viene chiamata la funzione \textbf{$HAL\_UART\_Receive\_IT$}, che abilita la ricezione in modalità non blocking con interrupt (è disponibile anche in modalità blocking, oppure con DMA).
+		Tutto il resto del programma è implementato nelle funzioni di callback: non appena il buffer di ricezione è pieno viene eseguita quella di ricezione, che si occupa di fare il parsing del comando ricevuto a condizione che non sia già in corso una misurazione. Esso viene ignorato se non valido, mentre nel caso contrario viene eseguita l'azione corrispondente sul LED e viene avviato il timer. Un flag viene asserito per indicare che è in corso una misurazione, e un altra variabile indica se il LED è correntemente acceso o spento. In seguito viene ri-abilitata la ricezione dei dati da seriale.
+
+		Quando il pulsante è premuto viene immediatamente salvato il valore attuale del counter in una variabile globale ed il timer viene fermato e resettato. Poi viene eseguito un controllo sul flag di misurazione: se non è asserito, allora l'azione viene ignorata. Altrimenti il flag di misurazione viene deasserito e il valore della variabile di supporto è convertito in esadecimale e formattato tramite la funzione sprintf su un'altra variabile temporanea. Con una funzione che implementa banalmente un ciclo for, questa "stringa" è copiata sul buffer di trasmissione senza il null character finale, per essere poi inviata tramite la funzione non-blocking \textbf{$HAL\_UART\_Transmit\_IT$}.
+		Il controllo sul flag è eseguito successivamente al salvataggio del valore del counter per non introdurre un errore nel conteggio dovuto alla latenza delle operazioni di controllo.
+
+		La funzione callback di fine trasmissione può non fare nulla ed è implementata con una \textbf{$\_\_NOP()$}.
+
+	\subsection{Test e debug}
+		Ogni periferico è stato testato singolarmente prima che venisse assemblato il programma. Il debug è stato eseguito mediante l'utilizzo della printf grazie alla modalità di semihosting; essa è stata implementata in una macro che riceve in ingresso una stringa che viene passata ad una printf ma con l'aggiunta di un carattere '\\n' finale. Come riportato sul sito della ST questa è una condizione necessaria per il corretto funzionamento del semihosting stesso. 
+
+		I comandi sono stati inviati e ricevuti da PC per mezzo del programma minicom.
+\end{document}
