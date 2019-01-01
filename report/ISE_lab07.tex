@@ -13,11 +13,14 @@
 \usepackage{multirow}
 \usepackage{siunitx}
 
-\title{Integrated Systems Architecture\\Lab session 2 Report}
-\author{Matteo Perotti (251453)\\Giuseppe Puletto ()\\Luca Romani ()\\Giuseppe Sarda (255648)}
+\title{Integrazione di Sistemi Embedded\\Lab 07 Report}
+\author{Matteo Perotti (251453)\\Giuseppe Puletto (251437)\\Luca Romani (255244)\\Giuseppe Sarda (255648)}
 
 \begin{document}
+
 \maketitle
+
+\newpage
 
 \begin{abstract}
 	E' stato creato un sistema che si compone di due parti: un programma Python che viene eseguito da PC e un programma C caricato e fatto girare su scheda NUCLEO-F401RE. La comunicazione tra i due dispositivi avviene mediante un cavo USB che emula una seriale. 
@@ -35,6 +38,7 @@ Le specifiche sono disponibili nel documento "lab07.pdf". Di seguito verranno ch
 \section{Programma Python}
 
 \section{Programma C}
+Il programma C deve permettere al microcontrollore di ricevere dati da seriale, interpretarli, accendere e spegnere un led, contare intervalli di tempo, formattarli e poi inviarli nuovamente tramite seriale.
 	\subsection{CubeMX}
 		Grazie al software CubeMX è stato possibile ottenere fin dall'inizio una struttura consistente del programma in modo molto agevole. 
 		\paragraph{UART2} Dagli schematici è possibile vedere che il Cortex-M4 e l'ST-LINK sono collegati tramite seriale. Quest'ultima è collegata ai pins PA2 e PA3 del controllore principale. Dal manuale della scheda NUCLEO viene esplicitato come la seriale interessata sia USART2.
@@ -42,7 +46,7 @@ Le specifiche sono disponibili nel documento "lab07.pdf". Di seguito verranno ch
 		\paragraph{TIM1} E' necessario contare con una risoluzione del millisecondo, ed il valore massimo esprimibile in tale unità di misura è 0xFFFF, ovvero 65,535 secondi. 
 		Dal reference manual del microcontrollore è possibile vedere che il timer TIM1 è collegato ad APB2. Da CubeMX si può impostare il clock relativo affinché sia di 42 MHz, e il timer affinché il prescaler lo faccia scendere ancora fino ad 1 kHz. In questo modo viene evitata la creazione di una funzione di conversione apposita per ottenere il tempo in millisecondi a partire dal contenuto del registro del timer: con queste impostazioni essi si equivalgono.
 		\paragraph{GPIO} Vengono usati il LED2 a disposizione dell'utente e il blue PushButton. Di quest'ultimo è importante attivare l'interrupt corrispondente allo stato di output asserito, ovvero al falling edge (si può ricavare dallo schematico che il pulsante cortocircuita a gnd il pin del microcontrollore).
-	\subsection{Clock settings}
+		\paragraph{Clock settings}
 		Come già spiegato nel precedente paragrafo è stato modificato il clock che arriva ad APB2. Il prescaler relativo è stato messo a 4. Il main clock è 84 MHz, viene quindi diviso per 4 per poi essere moltiplicato per 2 ed arrivare ad APB2.
 	\subsection{Scrittura del programma}
 		Il programma utilizza funzioni messe a disposizione dall'HAL della ST. Gli interrupt di ricezione e trasmissione UART, insieme con quello del push-button, sono stati astratti con tre funzioni callback.
