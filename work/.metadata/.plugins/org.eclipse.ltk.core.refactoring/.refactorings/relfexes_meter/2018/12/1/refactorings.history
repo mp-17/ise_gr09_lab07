@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;relfexes_meter/Inc/user_uart_param&apos; to &apos;user_uart_param.h&apos;" description="Rename resource &apos;user_uart_param&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Inc/user_uart_param" name="user_uart_param.h" stamp="1546248488176" updateReferences="true"/>
+</session>

@@ -1,0 +1,31 @@
+16:56:32 **** Incremental Build of configuration Debug for project uart_test ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+/home/matteo/git/ise_gr09_lab07/work/CubeMX/uart_test/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed="__attribute__((__packed__))"' -DUSE_HAL_DRIVER -DSTM32F401xE -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/uart_test/Inc" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/uart_test/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/uart_test/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/uart_test/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/uart_test/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'main':
+../Src/main.c:120:11: warning: variable 'bufTx' set but not used [-Wunused-but-set-variable]
+   uint8_t bufTx[5];
+           ^~~~~
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:331:3: warning: 'pinState' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, pinState);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: uart_test.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -specs=rdimon.specs -lc -lrdimon -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "uart_test.elf" @"objects.list"   -lm
+Finished building target: uart_test.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "uart_test.elf" "uart_test.hex"
+arm-none-eabi-size "uart_test.elf"
+   text	   data	    bss	    dec	    hex	filename
+  13044	    132	   1884	  15060	   3ad4	uart_test.elf
+ 
+16:56:42 **** Incremental Build of configuration Debug for project uart_test ****
+make all 
+make: Nothing to be done for 'all'.

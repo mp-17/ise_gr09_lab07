@@ -1,0 +1,2 @@
+#define UART_RX_SIZE 5
+#define UART_MAX_TIMEOUT 60

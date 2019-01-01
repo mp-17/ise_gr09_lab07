@@ -1,0 +1,16 @@
+#include "user_UART_related.h"
+
+/* Exported functions definition*/
+UART_RxCmdTypeDef UART_ParseRxCommand(char *UART_rxBuffer) {
+	if (UART_rxBuffer[0] == 'L') {
+		switch (UART_rxBuffer[1]):
+			case '0':
+				break;
+			case '1':
+				return TURN_LED_ON;
+				break;
+			case default:
+				return INVALID;
+				break;
+	}
+}

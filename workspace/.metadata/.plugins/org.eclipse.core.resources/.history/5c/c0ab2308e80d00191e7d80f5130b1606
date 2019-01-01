@@ -1,0 +1,8 @@
+#include "user_UART_related.h"
+
+/* Exported functions definition*/
+UART_RxCmdTypeDef UART_ParseRxCommand(char *UART_rxBuffer, uint8_t rxBuffer_size) {
+	if (rxBuffer_size < 2) {
+		return ERROR;
+	}
+}

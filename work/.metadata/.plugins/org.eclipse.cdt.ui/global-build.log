@@ -1,0 +1,73 @@
+13:29:40 **** Incremental Build of configuration Debug for project relfexes_meter ****
+make all 
+make: Nothing to be done for 'all'.
+13:29:41 **** Incremental Build of configuration Debug for project relfexes_meter ****
+make all 
+make: Nothing to be done for 'all'.
+13:30:17 **** Incremental Build of configuration Debug for project relfexes_meter ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed="__attribute__((__packed__))"' -DUSE_HAL_DRIVER -DSTM32F401xE -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Inc" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'main':
+../Src/main.c:136:8: warning: unused variable 'ciao' [-Wunused-variable]
+    int ciao = 0;
+        ^~~~
+Finished building: ../Src/main.c
+ 
+Building target: relfexes_meter.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -specs=rdimon.specs -lrdimon -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "relfexes_meter.elf" @"objects.list"   -lm
+Finished building target: relfexes_meter.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "relfexes_meter.elf" "relfexes_meter.hex"
+arm-none-eabi-size "relfexes_meter.elf"
+   text	   data	    bss	    dec	    hex	filename
+   6344	     24	   1656	   8024	   1f58	relfexes_meter.elf
+ 
+13:30:51 **** Incremental Build of configuration Debug for project relfexes_meter ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed="__attribute__((__packed__))"' -DUSE_HAL_DRIVER -DSTM32F401xE -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Inc" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+Finished building: ../Src/main.c
+ 
+Building target: relfexes_meter.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -specs=rdimon.specs -lrdimon -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "relfexes_meter.elf" @"objects.list"   -lm
+Finished building target: relfexes_meter.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "relfexes_meter.elf" "relfexes_meter.hex"
+arm-none-eabi-size "relfexes_meter.elf"
+   text	   data	    bss	    dec	    hex	filename
+  10960	    128	   1832	  12920	   3278	relfexes_meter.elf
+ 
+13:31:09 **** Incremental Build of configuration Debug for project relfexes_meter ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed="__attribute__((__packed__))"' -DUSE_HAL_DRIVER -DSTM32F401xE -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Inc" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/home/matteo/git/ise_gr09_lab07/work/CubeMX/relfexes_meter/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+Finished building: ../Src/main.c
+ 
+Building target: relfexes_meter.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -specs=rdimon.specs -lrdimon -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "relfexes_meter.elf" @"objects.list"   -lm
+Finished building target: relfexes_meter.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "relfexes_meter.elf" "relfexes_meter.hex"
+arm-none-eabi-size "relfexes_meter.elf"
+   text	   data	    bss	    dec	    hex	filename
+  11692	    136	   1840	  13668	   3564	relfexes_meter.elf
+ 
+13:31:13 **** Incremental Build of configuration Debug for project relfexes_meter ****
+make all 
+make: Nothing to be done for 'all'.
