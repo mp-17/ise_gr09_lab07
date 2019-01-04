@@ -16,6 +16,7 @@
 \title{Integrazione di Sistemi Embedded\\Lab 07 Report}
 \author{Matteo Perotti (251453)\\Giuseppe Puletto (251437)\\Luca Romani (255244)\\Giuseppe Sarda (255648)}
 
+
 \begin{document}
 
 \maketitle
@@ -36,6 +37,42 @@ Le specifiche sono disponibili nel documento "lab07.pdf". Di seguito verranno ch
 \end{enumerate}
 
 \section{Programma Python}
+\subsection{Graphical user interface GUI}
+L'interfaccia grafica è stata creata usando uno script in python e adoperando il modulo ``tkinter". La GUI consente all'utente di mandare i comandi ``L0" e ``L1" mediante l'utilizzo di due tasti presenti a schermo. Per quel che concerne l'utilizzo di funzioni e l'inizializzazione della porta seriale, l'interfaccia grafica si appoggia allo script lib.py.
+\subsubsection{Widgets}
+L'interfaccia grafica ha una finestra principale chiamata ``root" che viene creata mediante l'inizializzazione dell'interprete ``Tk()" del modulo di tkinter e al suo interno contiene gli oggetti:
+\begin{itemize}
+	\item main\_Frame
+	\item led\_on
+	\item led\_off
+	\item quit\_button
+	\item text\_score\_lab
+	\item t\_score\_lab
+\end{itemize}
+mainFrame è un frame che funziona da contenitore per i widget dell'interfaccia grafica. \`E stato istanziato per gestire in maniera separata il comportamento della finestra principale e dei widget.
+Gli altri oggetti sopra elencati sono i widget dell'interfaccia grafica e in particolare:
+\paragraph{led\_on} è un bottone verde che se premuto richiama la funzione <da definire> per inviare il comando ``L1" tramite la seriale alla scheda Nucleo.
+\paragraph{led\_off} è un bottone grigio che consente all'utente, come il widget led\_on, di trasmettere il comando ``L0" tramite seriale per spegnere il LED della Nucleo.
+\paragraph{quit\_button} è un bottone rosso che consente all'utente di uscire dal programma. Se premuto invoca la funzione ``quit()" dell'oggetto root che fa uscire lo script dal mainloop() dell'interfaccia grafica.
+\paragraph{text\_score\_lab} è un'etichetta che contiene del testo (Your time score is).
+\paragraph{t\_score\_lab} è un'etichetta che mostra il valore della variabile t\_score aggiornato in tempo reale.
+\subsubsection{Struttura}
+Per quello che riguarda il geometry manager si è deciso di adoperare ``pack()" per gestire mainFrame e ``grid()" per i vari widget. Dato che root ha un solo frame è stato usato pack(), in questo modo è stato più facile da configurare l'opzione di riempimento totale di mainFrame nella root e il suo ridimensionamento sempre in funzione della finestra padre. Al fine di ottenere questo risultato è stato necessario impostare in pack() i flag di ``expand" e ``fill" rispettivamente a ``BOTH" e ``1". Inoltre bisogna anche specificare quali righe e colonne del frame dovranno ridimensionarsi, per questo motivo sono stati inseriti due cicli for annidati che per ogni riga e ogni colonna vanno a mettere la variabile ``weight" delle funzioni ``rowconfigure()" e ``columnconfigure()" a 1. \newline
+Avendo in totale cinque widget, si è scelto grid() per avere un'organizzazione di tipo matriciale della GUI, in seguito viene riportata la matrice dell'interfaccia:
+\begin{table}[H]
+	
+	\renewcommand{\arraystretch}{3}
+	
+	\centering
+	\begin{tabular}{l|c|c|c}
+	     & 1 & 2 & 3 \\ \hline
+		1  \qquad \qquad  &led\_on & \qquad & led\_off  \qquad \qquad \\ \hline
+		2 & text\_score\_lab & t\_score\_lab & \qquad \\ \hline
+		3 & \qquad & quit\_button & \qquad
+	\end{tabular}
+\end{table}
+\noindent
+Anche per il manager grid è necessario cambiare delle variabili per ottenere un ridimensionamento automatico di ogni widget in funzione della finestra padre, di conseguenza è stata richiamata la funzione ``grid\_rowconfigure()" e ``grid\_columnconfigure" per andare a specificare quale riga e colonna dovessero essere ridimensionate dinamicamente. Per capire il fattore di scalamento del widget bisogna assegnare un valore alla variabile  ``weight" delle due funzioni sopra citate, in questo caso per tutti i widget, tranne il quit button, è stato scelto il valore 1.
 
 \section{Programma C}
 Il programma C deve permettere al microcontrollore di ricevere dati da seriale, interpretarli, accendere e spegnere un led, contare intervalli di tempo, formattarli e poi inviarli nuovamente tramite seriale.
