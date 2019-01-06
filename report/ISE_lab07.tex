@@ -48,14 +48,16 @@ L'interfaccia grafica ha una finestra principale chiamata ``root" che viene crea
 	\item quit\_button
 	\item text\_score\_lab
 	\item t\_score\_lab
+	\item error\_lab
 \end{itemize}
 mainFrame è un frame che funziona da contenitore per i widget dell'interfaccia grafica. \`E stato istanziato per gestire in maniera separata il comportamento della finestra principale e dei widget.
 Gli altri oggetti sopra elencati sono i widget dell'interfaccia grafica e in particolare:
-\paragraph{led\_on} è un bottone verde che se premuto richiama la funzione <da definire> per inviare il comando ``L1" tramite la seriale alla scheda Nucleo.
-\paragraph{led\_off} è un bottone grigio che consente all'utente, come il widget led\_on, di trasmettere il comando ``L0" tramite seriale per spegnere il LED della Nucleo.
+\paragraph{led\_on} è un bottone verde che se premuto richiama la funzione turn\_on\_LED per inviare il comando ``L1" tramite la seriale alla scheda Nucleo. All'interno di questa funzione viene richiamata la funzione send\_ser\_command() di lib.py il cui valore di ritorno è salvato all'interno della variabile locale tmp. In base al valore di tmp la funzione turn\_on\_LED aggiorna t\_score con il nuovo tempo dell'utente oppure aggiorna il valore di error\_flag dell'etichetta error\_lab senza modificare t\_score.
+\paragraph{led\_off} è un bottone grigio che consente all'utente, come il widget led\_on, di trasmettere il comando ``L0" tramite seriale per spegnere il LED della Nucleo richiamando la funzione turn\_off\_LED che lavora in modo speculare rispetto a quella dell'altro bottone.
 \paragraph{quit\_button} è un bottone rosso che consente all'utente di uscire dal programma. Se premuto invoca la funzione ``quit()" dell'oggetto root che fa uscire lo script dal mainloop() dell'interfaccia grafica.
 \paragraph{text\_score\_lab} è un'etichetta che contiene del testo (Your time score is).
 \paragraph{t\_score\_lab} è un'etichetta che mostra il valore della variabile t\_score aggiornato in tempo reale.
+\paragraph{error\_lab} è un'etichetta sensibile alla variabile error\_flag. 
 \subsubsection{Struttura}
 Per quello che riguarda il geometry manager si è deciso di adoperare ``pack()" per gestire mainFrame e ``grid()" per i vari widget. Dato che root ha un solo frame è stato usato pack(), in questo modo è stato più facile da configurare l'opzione di riempimento totale di mainFrame nella root e il suo ridimensionamento sempre in funzione della finestra padre. Al fine di ottenere questo risultato è stato necessario impostare in pack() i flag di ``expand" e ``fill" rispettivamente a ``BOTH" e ``1". Inoltre bisogna anche specificare quali righe e colonne del frame dovranno ridimensionarsi, per questo motivo sono stati inseriti due cicli for annidati che per ogni riga e ogni colonna vanno a mettere la variabile ``weight" delle funzioni ``rowconfigure()" e ``columnconfigure()" a 1. \newline
 Avendo in totale cinque widget, si è scelto grid() per avere un'organizzazione di tipo matriciale della GUI, in seguito viene riportata la matrice dell'interfaccia:
@@ -67,7 +69,7 @@ Avendo in totale cinque widget, si è scelto grid() per avere un'organizzazione 
 	\begin{tabular}{l|c|c|c}
 	     & 1 & 2 & 3 \\ \hline
 		1  \qquad \qquad  &led\_on & \qquad & led\_off  \qquad \qquad \\ \hline
-		2 & text\_score\_lab & t\_score\_lab & \qquad \\ \hline
+		2 & text\_score\_lab & t\_score\_lab & error\_lab \\ \hline
 		3 & \qquad & quit\_button & \qquad
 	\end{tabular}
 \end{table}
