@@ -53,7 +53,7 @@ def send_ser_cmd(command_to_send):
     ser.baudrate = 115200 #setting the baudrate
     ser.parity = serial.PARITY_NONE #setting the parity
     ser.bytesize = serial.EIGHTBITS #setting the bytesize
-    ser.timeout = 10 #setting a timeout for ser.read (if ser.read takes more than 10 seconds, the program automatically moves forward).
+    ser.timeout = 100 #setting a timeout for ser.read (if ser.read takes more than 10 seconds, the program automatically moves forward).
     #No specifics about ser.stopbits: by default, ser.stopbits is equal to STOPBITS_ONE (ser.stopbits = serial.STOPBITS_TWO)
      
     if constants.debug_constant == 1:
@@ -66,18 +66,20 @@ def send_ser_cmd(command_to_send):
     if command_to_send == constants.commands_to_send[1] and LED_state == 0:
         if ser.isOpen():
             #turning on the LED
+            LED_state = 1 #updating the LED state
             delay_cmd() #waiting random seconds
             ser.write(command_to_send) #send the command to the serial port
-            LED_state = 1 #updating the LED state
+            t_score_byte_object = ser.read(5) #read 5 bytes from the serial port .read returns a byte object
+            t_score = t_score_byte_object_conversion_to_seconds (t_score_byte_object) #updating the t_score
     elif command_to_send == constants.commands_to_send[0] and LED_state == 1:
         #sending the command
         if ser.isOpen():
-                #turning off the LED
-                LED_state = 0 #updating the LED state
-                delay_cmd() #waiting random seconds
-                ser.write(command_to_send) #send the command to the serial port
-                t_score_byte_object = ser.read(5) #read 5 bytes from the serial port .read returns a byte object
-                t_score = t_score_byte_object_conversion_to_seconds (t_score_byte_object) #updating the t_score
+            #turning off the LED
+            LED_state = 0 #updating the LED state
+            delay_cmd() #waiting random seconds
+            ser.write(command_to_send) #send the command to the serial port
+            t_score_byte_object = ser.read(5) #read 5 bytes from the serial port .read returns a byte object
+            t_score = t_score_byte_object_conversion_to_seconds (t_score_byte_object) #updating the t_score
     elif command_to_send == constants.commands_to_send[1] and LED_state == 1:
         # the LED is already ON
         t_score = "E0001"

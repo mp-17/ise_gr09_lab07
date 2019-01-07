@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import tkinter as tk
 from tkinter import *
 import tkinter.ttk as ttk
@@ -29,9 +31,9 @@ def turn_on_LED():
     if(tmp=="E0001"):
         error_flag.set("LED ALREADY\nON")
     elif(tmp==""):
-        t_score.set(tmp)        
+        t_score.set(tmp)
         error_flag.set("")
-        
+
 def turn_off_LED():
     tmp =""
     tmp=lib.send_ser_cmd(constants.commands_to_send[0])
@@ -39,9 +41,9 @@ def turn_off_LED():
     if(tmp=="E0000"):
         error_flag.set("LED ALREADY\nOFF")
     elif(tmp==""):
-        t_score.set(tmp)        
+        t_score.set(tmp)
         error_flag.set("")
-        
+
 def quit_prog():
     root.quit()
 ####
@@ -75,8 +77,8 @@ led_off=tk.Button(mainFrame, text="LED \n\nOFF", command= turn_off_LED, bg= "gra
 led_on=tk.Button(mainFrame, text="LED \n\nON", command= turn_on_LED, bg="green2", relief="solid", highlightbackground="dark green", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, width=14, height= 5, pady=10)
 
 ## labels to show the time score
-text_score_lab=tk.Label(mainFrame, text="Your time score is: ", font="Helvetica 15", bg='white', height=4)
-t_score_lab=tk.Label(mainFrame, textvariable=t_score, font="Helvetica 35 bold", bg='white')
+text_score_lab=tk.Label(mainFrame, text="Your time score is: ", font="Helvetica 15", bg='white',fg='black', height=4)
+t_score_lab=tk.Label(mainFrame, textvariable=t_score, font="Helvetica 35 bold", bg='white', fg='black')
 
 ## label to show a possible error due to LED already ON or already OFF
 error_lab=tk.Label(mainFrame, textvariable=error_flag,  font="Helvetica 25 bold", bg='white', fg='red', justify='center')
