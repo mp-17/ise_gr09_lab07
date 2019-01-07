@@ -1,0 +1,44 @@
+def displayLeaderboard():
+    leaderboard=Toplevel()
+    for row in range(1,constants.maxLeaders+2):
+        for col in range(1,4):
+            mainFrame.columnconfigure(col, weight=1)
+        mainFrame.rowconfigure(row, weight=1)
+    with open(constants.mem_file,"r") as mem_pointer:
+        i=0
+        for line in mem_pointer:
+            strings=line.split()
+            lnum=tk.Label(leaderboard,
+                        text=i,
+                        fg='black',
+                        bg='white',
+                        font='Helvetica 25 bold',
+                        justify='center')
+            lname=tk.Label(leaderboard,
+                        text=strings[0],
+                        fg='black',
+                        bg='white',
+                        font='Helvetica 25 bold',
+                        justify='center')
+            lscore=tk.Label(leaderboard,
+                        text=strings[1],
+                        fg='black',
+                        bg='white',
+                        font='Helvetica 25 bold',
+                        justify='center')
+            lnum.grid(row=i, column=1, sticky=(N, S, W, E))
+            lname.grid(row=i, column=2, sticky=(N, S, W, E))
+            lscore.grid(row=i, column=3, sticky=(N, S, W, E))
+            i+=1
+    quit_button=tk.Button(leaderboard,
+                            text="QUIT",
+                            command=quit_window(leaderboard),
+                            bg='red3',
+                            highlightbackground="firebrick4",
+                            font="Helvetica 20 bold ",
+                            activebackground="SkyBlue1",
+                            highlightthickness=4,
+                            pady=5,
+                            width=3,
+                            height=1)
+    quit_button.grid(row=i, columnspan=3, sticky= (N, S, W, E))
