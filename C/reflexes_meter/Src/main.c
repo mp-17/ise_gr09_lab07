@@ -82,7 +82,7 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
-extern void initialise_monitor_handles(void);
+//extern void initialise_monitor_handles(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -96,7 +96,7 @@ extern void initialise_monitor_handles(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	initialise_monitor_handles(); // for semihosting facility
+	//initialise_monitor_handles(); // for semihosting facility
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/

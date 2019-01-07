@@ -26,6 +26,7 @@ if len(sys.argv) == 2: #check the number of parameters passed to the lab07 Pyhto
                 error_state = 2
         
     elif sys.argv[1] == '-g' : #GUI mode
+        print('GUI')
         os.system("python3 gui.py")
         sys.exit([0])
     else:

@@ -25,24 +25,22 @@ import constants
 ## in those scenarios there is no change in t_score value
 ## an error sentence is displayed on the GUI
 def turn_on_LED():
-    tmp =""
+    error_flag.set("")
+    tmp =""    
     tmp=lib.send_ser_cmd(constants.commands_to_send[1])
-    print("L1")
     if(tmp=="E0001"):
         error_flag.set("LED ALREADY\nON")
-    elif(tmp==""):
+    else:
         t_score.set(tmp)
-        error_flag.set("")
 
 def turn_off_LED():
+    error_flag.set("")
     tmp =""
     tmp=lib.send_ser_cmd(constants.commands_to_send[0])
-    print("L0")
     if(tmp=="E0000"):
         error_flag.set("LED ALREADY\nOFF")
-    elif(tmp==""):
+    else:
         t_score.set(tmp)
-        error_flag.set("")
 
 def quit_prog():
     root.quit()
@@ -53,7 +51,7 @@ root= Tk()
 error_flag= StringVar()
 error_flag.set("")
 t_score= StringVar()
-t_score.set("65 ms")
+t_score.set("")
 
 #### Frame and root
 root.title("Reflexes Measurer")
@@ -78,7 +76,7 @@ led_on=tk.Button(mainFrame, text="LED \n\nON", command= turn_on_LED, bg="green2"
 
 ## labels to show the time score
 text_score_lab=tk.Label(mainFrame, text="Your time score is: ", font="Helvetica 15", bg='white',fg='black', height=4)
-t_score_lab=tk.Label(mainFrame, textvariable=t_score, font="Helvetica 35 bold", bg='white', fg='black')
+t_score_lab=tk.Label(mainFrame, textvariable=t_score, font="Helvetica 35 bold", bg='white', fg='black', width=8)
 
 ## label to show a possible error due to LED already ON or already OFF
 error_lab=tk.Label(mainFrame, textvariable=error_flag,  font="Helvetica 25 bold", bg='white', fg='red', justify='center')
