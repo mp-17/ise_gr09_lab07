@@ -1,2 +1,5 @@
-Marco 15.2
-Caio  20
+giu 0
+marco 10
+ciccino 12.5
+Angelo 12.5
+caio 25.1
