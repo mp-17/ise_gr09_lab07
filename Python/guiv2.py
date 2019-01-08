@@ -20,13 +20,6 @@ from operator import itemgetter
 
 #### functions declaration
 
-#def set_score(score):
-#    scoreWindow=Toplevel()
-#    for row in range(1,3):
-#        for col in range(1,3):
-#            mainFrame.columnconfigure(col, weight=1)
-#        mainFrame.rowconfigure(row, weight=1)
-#    l=tk.Label(scoreWindow, textvariable="Do you want to save result?",  font="Helvetica 25 bold", bg='white', fg='red', justify='center')
 
 def uploadMem(name,score,window):
     strings=[]
@@ -34,7 +27,7 @@ def uploadMem(name,score,window):
         for line in mem_pointer:
             temp=line.split()
             strings+=[(temp[0],temp[1])]
-    strings+=[(name,str(score))]
+    strings+=[(name,score)]
     #for i in range(len(strings)):
     #    print("{} {}".format(strings[i][0],strings[i][1]))
     strings.sort(key=itemgetter(1))
@@ -75,7 +68,6 @@ def turn_on_LED():
         error_flag.set("LED ALREADY\nON")
     else:
         t_score.set(tmp)
-        set_score(tmp)
 
 def turn_off_LED():
     error_flag.set("")
@@ -85,7 +77,6 @@ def turn_off_LED():
         error_flag.set("LED ALREADY\nOFF")
     else:
         t_score.set(tmp)
-        set_score(tmp)
 
 def quit_window(window):
     window.destroy()
@@ -173,7 +164,7 @@ t_score_lab=tk.Label(mainFrame, textvariable=t_score, font="Helvetica 35 bold", 
 error_lab=tk.Label(mainFrame, textvariable=error_flag,  font="Helvetica 25 bold", bg='white', fg='red', justify='center')
 
 ## save result
-save=tk.Button(mainFrame, text="Save", command=lambda: saveResult(t_score), bg='red3', highlightbackground="firebrick4", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=12, height=1)
+save=tk.Button(mainFrame, text="Save", command=lambda: saveResult(t_score_lab.cget("text")), bg='red3', highlightbackground="firebrick4", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=12, height=1)
 
 ## display leaderboard
 leaderboard=tk.Button(mainFrame, text="Leaderboard", command=displayLeaderboard, bg='red3', highlightbackground="firebrick4", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=12, height=1)
