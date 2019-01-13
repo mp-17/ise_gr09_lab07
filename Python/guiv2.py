@@ -7,40 +7,18 @@ import tkinter.ttk as ttk
 import lib as lib
 from lib import *
 import constants
-from operator import itemgetter
+
 #### GUI STRUCTURE ####
 
 ###########################
-# LEDON ## VOID ## LEDOFF #
-# TEXT  ## TIME ## ERROR  #
-# VOID  ## QUIT ## VOID   #
+# LEDON ## ERROR ## LEDOFF #
+# TEXT  ## TIME  ## SAVE   #
+# LB    ## QUIT  ## VOID   #
 ###########################
 
 ####       END     ####
 
 #### functions declaration
-
-
-def uploadMem(name,score,window):
-    if name != "":
-        strings=[]
-        with open(constants.mem_file,"r") as mem_pointer:
-            for line in mem_pointer:
-                temp=line.split()
-                strings+=[(temp[0],temp[1])]
-        strings+=[(name,score)]
-        #for i in range(len(strings)):
-        #    print("{} {}".format(strings[i][0],strings[i][1]))
-        strings.sort(key=itemgetter(1))
-
-        with open(constants.mem_file,"w") as mem_pointer:
-            if len(strings)>constants.maxLeaders:
-                max=constants.maxLeaders
-            else:
-                max=len(strings)
-            for i in range(0,max):
-                mem_pointer.write(strings[i][0]+" "+strings[i][1]+'\n')
-    quit_window(window)
 
 def saveResult(result):
     saveWindow=Toplevel(bg="white")
@@ -52,7 +30,7 @@ def saveResult(result):
     name.grid(row=1,column=1,sticky=(W))
     nick=tk.Entry(saveWindow,font="Helvetica 25 bold",bg='white',fg='black',width="10")
     nick.grid(row=1,column=2,sticky=(N, S, W, E),padx=30, pady=30)
-    yesButton=tk.Button(saveWindow,text="Yes", command=lambda: uploadMem(nick.get(),result,saveWindow), bg='red3', highlightbackground="firebrick4", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=5, height=1)
+    yesButton=tk.Button(saveWindow,text="Yes", command=lambda: uploadMem(nick.get(),result,saveWindow,constants.gui_mod), bg='red3', highlightbackground="firebrick4", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=5, height=1)
     yesButton.grid(row=2,column=1,sticky=(N),padx=30, pady=30)
     noButton=tk.Button(saveWindow,text="No", command=lambda:quit_window(saveWindow), bg='red3', highlightbackground="firebrick4", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=5, height=1)
     noButton.grid(row=2,column=2,sticky=(N),padx=30, pady=30)
@@ -78,9 +56,6 @@ def turn_off_LED():
         error_flag.set("LED ALREADY\nOFF")
     else:
         t_score.set(tmp)
-
-def quit_window(window):
-    window.destroy()
 
 def displayLeaderboard():
     leaderboard=Toplevel(bg="white")
@@ -187,7 +162,7 @@ t_score_lab=tk.Label(mainFrame, textvariable=t_score, font="Helvetica 35 bold", 
 error_lab=tk.Label(mainFrame, textvariable=error_flag,  font="Helvetica 25 bold", bg='white', fg='red', justify='center')
 
 ## save result
-save=tk.Button(mainFrame, text="Save", command=lambda: saveResult(t_score_lab.cget("text")), bg='blue', highlightbackground="dark blue", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=12, height=1)
+save=tk.Button(mainFrame, text="Save", command=lambda: saveResult(t_score_lab.cget("text")[0:-3]), bg='blue', highlightbackground="dark blue", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=12, height=1)
 
 ## display leaderboard
 leaderboard=tk.Button(mainFrame, text="Leaderboard", command=displayLeaderboard, bg='blue', highlightbackground="dark blue", font="Helvetica 20 bold ", activebackground="SkyBlue1", highlightthickness=4, pady=5, width=12, height=1)
