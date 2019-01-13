@@ -1,6 +1,6 @@
 giu 0
 marco 10
-ciccino 12.5
-Angelo 12.5
-caio 25.1
-Giuseppe 440 ms
+ciccino 12
+Angelo 15
+caio 25
+Giuseppe 440
