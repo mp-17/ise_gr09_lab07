@@ -1,10 +1,4 @@
-marco 126
-Francesco 226
-Marco 250
-Giovanni 269
-Tu 275
-caio 295
-Giuseppe 296
-Grino 298
-Ale 306
-Scarso 368
+GiuseppeP 269
+Luca 296
+GiuseppeS 306
+Matteo 368

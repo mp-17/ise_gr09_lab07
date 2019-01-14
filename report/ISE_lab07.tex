@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-
+\usepackage[utf8x]{inputenc}
 \usepackage[english]{babel}
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 \usepackage{amsmath}
@@ -12,6 +12,7 @@
 \usepackage[table]{colortbl}
 \usepackage{multirow}
 \usepackage{siunitx}
+\usepackage{graphics}
 
 \title{Integrazione di Sistemi Embedded\\Lab 07 Report}
 \author{Matteo Perotti (251453)\\Giuseppe Puletto (251437)\\Luca Romani (255244)\\Giuseppe Sarda (255648)}
@@ -25,7 +26,8 @@
 
 \begin{abstract}
 	E' stato creato un sistema che si compone di due parti: un programma Python che viene eseguito da PC e un programma C caricato e fatto girare su scheda NUCLEO-F401RE. La comunicazione tra i due dispositivi avviene mediante un cavo USB che emula una seriale. 
-	Il debug è stato eseguito grazie alla modalità di SEMIHOSTING che ha permesso il reindirizzamento dello std-output dal processore ARM Cortex M4 passando per il debugger/loader ST-LINK fino al PC.
+	Il debug è stato eseguito grazie alla modalità di SEMIHOSTING che ha permesso il reindirizzamento dello std-output dal processore ARM Cortex M4 passando per il debugger/loader ST-LINK fino al PC.\newline
+	La seguente relazione spiega i passi operativi in ordine temporale che hanno portato al progetto così come consegnato. La versione finale verrà descritta solo al capitolo 4
 \end{abstract}
 
 \section{Descrizione dell'algoritmo}
@@ -37,6 +39,29 @@ Le specifiche sono disponibili nel documento "lab07.pdf". Di seguito verranno ch
 \end{enumerate}
 
 \section{Programma Python}
+Il programma Python, interfacciandosi tramite linea seriale col microcontrollore, permette di inviare o ricevere informazioni da quest'ultimo, informazioni quali i comandi per spegnere e accendere il led del micro o il tempo impiegato dall'utente per finire una simulazione. Pu\`{o} essere utilizzato sia tramite terminale che tramite interfaccia grafica. Il progetto Python+
+3 consta di quattro file .py: measurer.py, lib.py, constants.py e gui.py.
+
+\subsection{Avvio - measurer.py}
+Il programma Python si avvia eseguendo il file measurer.py e passandogli un parametro, ``-t" o ``-g". ``-t" permette l'esecuzione via terminale, mentre ``-g" quella via interfaccia grafica. Il file si serve oltre che della librerie di os e di sys.
+\newline 
+Se measurer.py viene eseguito passandogli un numero non corretto di paramteri o un parametro diverso da ``-t" o ``-g", il programma segnala l'errore via terminale e termina con un exit status uguale a 2. Se avviato correttamente con l'opzione ``-g", measurer.py esegue il file gui.py e l'interfaccia grafica si apre.
+\newline
+Se avviato correttamente con l'opzione ``-t", measurer.py interagisce con l'utente via terminale tramite un men\`{u}. L'utente pu\`{o} chiudere il programma o inviare il comando ``L0" (spegni il LED) o ``L1" (accendi il LED) digitando sul terminale rispettivamente q, y o n. Se si digita q, measurer.py si chiude ritornando come exit state 0; se si digita y (n), measurer.py esegue la funzione turn\_on\_LED\_terminal() (turn\_off\_LED\_terminal()) importata dal file lib.py.  Il valore di ritorno di turn\_on\_LED\_terminal() (turn\_off\_LED\_terminal()) viene utilizzato come exit state al momento della chiusura del programma. Se si digita uno o pi\`{u} caratteri diversi dai tre prima specificati, il programma segnala l'errore via terminale, chiedendo nuovamente all'utente cosa voglia fare.
+
+\subsection{Funzioni via terminale - lib.py}
+Il file lib.py contiene la definizione delle funzioni delay\_cmd(), send\_ser\_cmd(command\_to\_send),  turn\_on\_LED\_terminal() e turn\_off\_LED\_terminal(), \\ t\_score\_byte\_object\_conversion\_to seconds (t\_score\_byte\_object).
+\newline
+La funzione turn\_on\_LED\_terminal() (turn\_off\_LED\_terminal()) invia alla porta seriale specificata nel file constants.py il comando per accendere (spegnere) il led. Non riceve alcun parametro e ritorna un intero. Esso vale 3 se il LED \`{e} gi\`{a} acceso (spento), altrimenti ritorna 0.
+\newline
+La funzione send\_ser\_cmd(command\_to\_send) riceve una stringa come parametro d'ingresso che contiene il comando che l'utente desidera inviare alla seriale; ritorna una stringa con il tempo impiegato dall'utente nel premere il pulsante o un errore; utilizza il pacchetto PySerial per gestire la comunicazione via seriale e le altre funzioni di lib.py delay\_cmd() e t\_score\_byte\_object\_conversion\_to\_seconds (t\_score\_byte\_object).
+\newline
+Prima di tutto, send\_ser\_cmd() apre la porta seriale e imposta baudrate, parity bit e byte size della comunicazione, nonch\'{e} un timeout per leggere la seriale. Il timeout \`{e} impostato a 100 s ed impedisce al programma Python di bloccarsi qualora dalla seriale non ricevesse i 5 byte che si aspetta. Poi, se il comando \`{e} valido, cio\'{e} il led è spento (acceso) e l'utente desidera accenderlo (spegnerlo), dopo un ritardo casuale di 10-20 secondi, viene inviato il comando sulla seriale, non prima per\'{o} di averlo convertito da stringa a una variabile di tipo byte. Dopo aver letto 5 byte dalla seriale, converte quanto ricevuto in stringa e la passa come parametro di ritorno. La funzione si preoccupa anche di aggiornare LED\_STATE, la variabile globale che permette al programma Python di ricordare lo stato del LED del micro. Qualora il comando non sia valido, ritorna come stringa un errore ``E0001" (``E0000") qualora si voglia accendere (spegnere) il led del micro che \`{e} gi\`{a} acceso (spento).
+La funzione delay\_cmd() n\'{e} riceve, n\'{e} ritorna alcun parametro. Usa la funzione randint della libreria Python random e sleep della libreria Python time. Se eseguita, genera un ritardo casuale tra 10 e 20 secondi.
+La funzione  t\_score\_byte\_object\_conversion\_to seconds (t\_score\_byte\_object) riceve una variabile byte come parametro d'ingresso e ritorna una stringa come parametro di ritorno. La variabile byte dovrebbe contenere il valore di un intervallo di tempo nella forma ``Thhhh", dove ``hhhh" è il valore dell'intervallo di tempo in ms espesso in esadecimale. Ritorna una stringa contenente il tempo convertito in millisecondi e la relativa unità di tempo. 
+
+\subsection{File delle constanti - constants.py}
+Il file constants.py contiene il valore delle costanti usate dai file .py.
 \subsection{Graphical user interface GUI}
 L'interfaccia grafica è stata creata usando uno script in python e adoperando il modulo ``tkinter". La GUI consente all'utente di mandare i comandi ``L0" e ``L1" mediante l'utilizzo di due tasti presenti a schermo. Per quel che concerne l'utilizzo di funzioni e l'inizializzazione della porta seriale, l'interfaccia grafica si appoggia allo script lib.py.
 \subsubsection{Widgets}
@@ -103,4 +128,52 @@ Il programma C deve permettere al microcontrollore di ricevere dati da seriale, 
 		Ogni periferico è stato testato singolarmente prima che venisse assemblato il programma. Il debug è stato eseguito mediante l'utilizzo della printf grazie alla modalità di semihosting; essa è stata implementata in una macro che riceve in ingresso una stringa che viene passata ad una printf ma con l'aggiunta di un carattere '\\n' finale. Come riportato sul sito della ST questa è una condizione necessaria per il corretto funzionamento del semihosting stesso. 
 
 		I comandi sono stati inviati e ricevuti da PC per mezzo del programma minicom.
+\section{Extra: la Leaderboard}
+		Una volta aver soddisfatto le specifiche e testato in modo soddisfacente il sistema si è deciso di aggiungere una \textit{feature} extra alla parte "front end" del progetto e permettere all'utente di salvare il proprio \textit{score} in una leaderboard, la cui lunghezza può essere scelta all'interno del file \textit{constants.py}. \newline
+		Al fine di implementare una classifica, accessibile e gestita mediante il programma, alcune modifiche sono state effettuate al codice e all'interfaccia grafica per:
+		\begin{itemize}
+			\item Dare l'opportunità di \textbf{aggiungere} il proprio punteggio alla \textit{leaderboard}.
+			\item \textbf{Visualizzare} la classifica.
+		\end{itemize}
+		Nel caso l'utente voglia aggiungere lo \textit{score} ottenuto, deve identificarlo con un \textit{nickname}, richiesto dal programma, che verrà memorizzato e ordinato in modo crescente in base al punteggio. Se il nome scelto è gia presente in classifica, lo score verrà aggiornato solo se minore rispetto al precedente. Se non viene inserito il nome nessuna modifica viene effettuata.\newline
+		Non è possibile azzerare la classifica mediante programma. Unico modo è quello di eliminare a mano il file di salvataggio contenuto nel path relativo \textit{./mem/MemCard1.txt} .
+	\subsection{Esecuzione da terminale}
+		L'esecuzione da terminale si presenta come segue:
+
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.75]{img/terminal.png}
+			\caption{Menù programma da terminale}
+		\end{figure}
+		Digitando l'opzione \textbf{\textit{l}} è possibile stampare a schermo la classifica.
+		Nel caso invece si avvii il gioco e si ottenga un punteggio valido, il programma chiede se si vuole salvare. In caso affermativo viene richiesto il \textit{nickname} da associare allo score.
+	\subsection{Esecuzione con GUI}
+		L'esecuzione con GUI si presenta come segue:
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.35]{img/GUI.png}
+			\caption{Interfaccia grafica del programma}
+		\end{figure}
+		Dove, rispetto alla precedente versione, l'errore è stato posizionato tra i due pulsanti di avvio.
+		Al suo posto è stato inserito il \textit{Button} che permette all'utente di salvare il punteggio. Una volta premuto farà aprire la seguente finestra:
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.35]{img/save.png}
+			\caption{Finestra di salvataggio}
+		\end{figure}
+		Dove se si preme il pulsante "\textbf{Yes}" il \textit{Name:} inserito viene salvato insieme al punteggio nel file di memoria, e poi la finestra viene chiusa. Diversamente, premendo "\textbf{No}" nessuna operazione viene effettuata se non il ritorno alla interfaccia principale.\newline
+		Secondo \textit{Button} inserito è quello relativo alla visualizzazione della classifica vera e propria. Se viene premuto la finestra di dialogo che si aprirà è la seguente:
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.35]{img/leaderboard.png}
+			\caption{Leaderboard}
+		\end{figure}
+	\section{Limiti del progetto}
+		Principali limiti del progetto sono maggiormente due.\newline
+		\begin{itemize}
+			\item Il primo è relativo alla UART la quale, al primissimo avvio del gioco dopo il reset o il caricamento del programma, a volte invia un dato inesatto che non si aspetta. Dalla seconda esecuzione tutto funziona correttamente.
+			\item Altro limite del programma è il fatto che al suo avvio si presuppone il LED sia spento. Ma se all'esecuzione precedente, si è chiusa l'interfaccia con il LED ancora acceso,  all'avvio successivo del programma bisognerà premere il bottone \textit{LED ON}, attendere i 100s di timeout e poi tutto riprende normalmente.
+			Alternativa, in tale caso, è premere il tasto nero di reset sul micro controllore.
+		\end{itemize}
+		
 \end{document}
