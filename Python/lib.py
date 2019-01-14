@@ -8,6 +8,17 @@ from operator import itemgetter
 t_score = "" #a global variable that saves the time interval value or a kind of error
 LED_state = 0 # a global variable that saves the LED state: if it is 0, the LED is off, otherwise the LED is on.
 
+
+# getInput(string):
+#
+# DESCRIPTION
+#    Get an input string displaing a message specified as input parameter.
+# INPUT
+#    Needs as inputs:
+#       string: message to be displayed at input request.
+# OUTPUT
+#    Returns the user's input.
+
 def getInput(string):
     return input(string)
 
@@ -88,6 +99,20 @@ def send_ser_cmd(command_to_send):
 
     return t_score
 
+# uploadMem(name,score,window,mode):
+#
+# DESCRIPTION
+#    Uploads the memory leaderboard with name and score specified as input
+# INPUT
+#    Needs as inputs:
+#       name:   nickname related to the score we want to save
+#       score:  score we want to save
+#       window: window where we asked to save the result, in order to close it
+#               after saving
+#       mode:   mode we've started the program with. In case of -t no windows
+#               has to be closed
+# OUTPUT
+#    NO return.
 def uploadMem(name,score,window,mode):
     if name != "":
         strings=[]
@@ -106,7 +131,6 @@ def uploadMem(name,score,window,mode):
         if flag_setted==False:
             strings+=[(name,score)]
         strings.sort(key=(itemgetter(1)))
-        strings.sort(key=len)
         with open(constants.mem_file,"w") as mem_pointer:
             if len(strings)>constants.maxLeaders:
                 max=constants.maxLeaders
@@ -167,6 +191,14 @@ def turn_off_LED_terminal():
             uploadMem(name,t_score[0:-3],None,None)
         return 0
 
+# displayLeaderboard_terminal():
+#
+# DESCRIPTION
+#    Displays the leaderboard when program is executed in -t mode
+# INPUT
+#    No inputs.
+# OUTPUT
+#    NO return.
 def displayLeaderboard_terminal():
     with open(constants.mem_file,"r") as mem_pointer:
         i=0
@@ -177,10 +209,26 @@ def displayLeaderboard_terminal():
             spaces2=" "*(5-len(strings[1]))
             print("{}{} {}{} {}{}ms".format(spaces0,i+1,strings[0],spaces1,spaces2,strings[1]))
             i+=1
-
+# quit_window(window):
+#
+# DESCRIPTION
+#    Quits the Tkinter window passed as parameter
+# INPUT
+#    window: window to e detroied
+# OUTPUT
+#    NO return.
 def quit_window(window):
     window.destroy()
 
+# displayMenu():
+#
+# DESCRIPTION
+#    Prints the menu in terminal mode execution. Options have to be specified
+#    constants.py file.
+# INPUT
+#    No inputs
+# OUTPUT
+#    NO return.
 def displayMenu():
     print("Digit one of the following options:")
     for i in range(len(constants.men_options)):

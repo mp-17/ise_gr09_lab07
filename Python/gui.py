@@ -20,6 +20,20 @@ import constants
 
 #### functions declaration
 
+# saveResult(result):
+#
+# DESCRIPTION
+#    Open the window that permit to inser a nickname associated with the Score
+#    we'd like to save.
+    ##################
+    # Label ## Entry #
+    # YES   ## NO    #
+    ##################
+# INPUT
+#    result: the result we want to save given by the Save button that calls
+#            saveResult as a command.
+# OUTPUT
+#    NO return.
 def saveResult(result):
     saveWindow=Toplevel(bg="white")
     for row in range(1,3):
@@ -57,6 +71,20 @@ def turn_off_LED():
     else:
         t_score.set(tmp)
 
+# displayLeaderboard():
+#
+# DESCRIPTION
+#    Open the window that displays the leaderboard
+    ###########################
+    # POS   ## NAME  ## SCORE #
+    # label ## label ## label #
+    #  ..   ##  ..   ##   ..  #
+    #          QUIT           #
+    ###########################
+# INPUT
+#    No inputs.
+# OUTPUT
+#    NO return.
 def displayLeaderboard():
     leaderboard=Toplevel(bg="white")
     leaderboard.title("Leaderboard")
