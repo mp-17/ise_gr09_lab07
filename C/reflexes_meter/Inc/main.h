@@ -73,10 +73,10 @@ extern "C" {
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
+/* USER CODE BEGIN EFP */
+
 // this is NOT a safe function. The parameter "size" HAS to be in range for both the strings
 static void mem_StrCpy(uint8_t *destStr, uint8_t *srcStr, uint8_t size);
-
-/* USER CODE BEGIN EFP */
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

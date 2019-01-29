@@ -1,0 +1,194 @@
+!SESSION 2019-01-29 18:54:14.313 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product file:/home/matteo/git/ise_gr09_lab07/C/reflexes_meter/.cproject
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product file:/home/matteo/git/ise_gr09_lab07/C/reflexes_meter/.cproject
+
+!ENTRY fr.ac6.mcu.ide 1 1 2019-01-29 18:54:29.598
+!MESSAGE Started RMI Server, listening on port 21112
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-01-29 18:54:35.744
+!MESSAGE Indexed 'reflexes_meter' (20 sources, 71 headers) in 4.38 sec: 6,963 declarations; 28,435 references; 3 unresolved inclusions; 168 syntax errors; 2,703 unresolved names (7.1%)
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-01-29 19:11:17.181
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-01-29 19:11:17.182
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY fr.ac6.mcu.debug 4 5012 2019-01-29 19:56:39.610
+!MESSAGE Error in final launch sequence
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:111)
+	at fr.ac6.mcu.debug.launching.MCUGDBJtagDSFLaunchConfigurationDelegate.launchDebugSession(MCUGDBJtagDSFLaunchConfigurationDelegate.java:258)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:101)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:90)
+	at fr.ac6.mcu.debug.launching.MCUGDBJtagDSFLaunchConfigurationDelegate.launch(MCUGDBJtagDSFLaunchConfigurationDelegate.java:296)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:885)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+java.lang.Exception: Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:941)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:770)
+!SUBENTRY 1 org.eclipse.cdt.dsf 4 10004 2019-01-29 19:56:39.615
+!MESSAGE Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+!SUBENTRY 2 org.eclipse.cdt.dsf.gdb 4 10004 2019-01-29 19:56:39.615
+!MESSAGE Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+!STACK 0
+java.lang.Exception: Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:941)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:770)
+
+!ENTRY fr.ac6.mcu.debug 4 5012 2019-01-29 19:57:31.725
+!MESSAGE Error in final launch sequence
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:111)
+	at fr.ac6.mcu.debug.launching.MCUGDBJtagDSFLaunchConfigurationDelegate.launchDebugSession(MCUGDBJtagDSFLaunchConfigurationDelegate.java:258)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:101)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:90)
+	at fr.ac6.mcu.debug.launching.MCUGDBJtagDSFLaunchConfigurationDelegate.launch(MCUGDBJtagDSFLaunchConfigurationDelegate.java:296)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:885)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+java.lang.Exception: Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:941)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:770)
+!SUBENTRY 1 org.eclipse.cdt.dsf 4 10004 2019-01-29 19:57:31.725
+!MESSAGE Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+!SUBENTRY 2 org.eclipse.cdt.dsf.gdb 4 10004 2019-01-29 19:57:31.725
+!MESSAGE Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+!STACK 0
+java.lang.Exception: Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:941)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:770)
+
+!ENTRY fr.ac6.mcu.debug 4 5012 2019-01-29 19:58:08.716
+!MESSAGE Error in final launch sequence
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:111)
+	at fr.ac6.mcu.debug.launching.MCUGDBJtagDSFLaunchConfigurationDelegate.launchDebugSession(MCUGDBJtagDSFLaunchConfigurationDelegate.java:258)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:101)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:90)
+	at fr.ac6.mcu.debug.launching.MCUGDBJtagDSFLaunchConfigurationDelegate.launch(MCUGDBJtagDSFLaunchConfigurationDelegate.java:296)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:885)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+java.lang.Exception: Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:941)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:770)
+!SUBENTRY 1 org.eclipse.cdt.dsf 4 10004 2019-01-29 19:58:08.716
+!MESSAGE Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+!SUBENTRY 2 org.eclipse.cdt.dsf.gdb 4 10004 2019-01-29 19:58:08.717
+!MESSAGE Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+!STACK 0
+java.lang.Exception: Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:941)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:770)
+
+!ENTRY fr.ac6.mcu.debug 4 5012 2019-01-29 19:58:47.993
+!MESSAGE Error in final launch sequence
+!STACK 1
+org.eclipse.core.runtime.CoreException: Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:111)
+	at fr.ac6.mcu.debug.launching.MCUGDBJtagDSFLaunchConfigurationDelegate.launchDebugSession(MCUGDBJtagDSFLaunchConfigurationDelegate.java:258)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:101)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:90)
+	at fr.ac6.mcu.debug.launching.MCUGDBJtagDSFLaunchConfigurationDelegate.launch(MCUGDBJtagDSFLaunchConfigurationDelegate.java:296)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:885)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+java.lang.Exception: Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:941)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:770)
+!SUBENTRY 1 org.eclipse.cdt.dsf 4 10004 2019-01-29 19:58:47.994
+!MESSAGE Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+!SUBENTRY 2 org.eclipse.cdt.dsf.gdb 4 10004 2019-01-29 19:58:47.994
+!MESSAGE Failed to execute MI command:
+add monitor arm semihosting enable
+Error message from debugger back end:
+Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+!STACK 0
+java.lang.Exception: Ambiguous command "add monitor arm semihosting enable": add-auto-load-safe-path, add-auto-load-scripts-directory, add-inferior, add-symbol-file.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:941)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:770)
+!SESSION 2019-01-29 22:27:16.064 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-01-29 22:27:55.328
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY fr.ac6.mcu.ide 1 1 2019-01-29 22:28:07.291
+!MESSAGE Started RMI Server, listening on port 21112
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-01-29 22:53:43.714
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2019-01-29 22:53:43.715
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType

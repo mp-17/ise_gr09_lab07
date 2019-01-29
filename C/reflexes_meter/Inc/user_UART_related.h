@@ -1,7 +1,7 @@
 #include <stdint.h>
 
-#define UART2_TXBUFFER_SIZE 5
-#define UART2_RXBUFFER_SIZE 2
+#define UART1_TXBUFFER_SIZE 5
+#define UART1_RXBUFFER_SIZE 2
 
 /* Possible rx commands */
 typedef enum {

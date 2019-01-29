@@ -1,0 +1,8 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=linux
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:reflexes_meter.elf,org.eclipse.launchbar.core.descriptorType.default\:reflexes_meter Debug
+eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:reflexes_meter\ Debug/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:reflexes_meter\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:reflexes_meter.elf/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:reflexes_meter.elf/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

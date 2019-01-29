@@ -64,25 +64,26 @@
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim1;
 
-UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart1;
+//UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 static uint16_t cnt;
 static _Bool isLEDOn;
 static _Bool isMeasuring;
-static uint8_t txBuf_tmp[UART2_TXBUFFER_SIZE+1];
+static uint8_t txBuf_tmp[UART1_TXBUFFER_SIZE+1];
 
-static uint8_t UART2_txBuffer[UART2_TXBUFFER_SIZE];
-static uint8_t UART2_rxBuffer[UART2_RXBUFFER_SIZE];
+static uint8_t UART1_txBuffer[UART1_TXBUFFER_SIZE];
+static uint8_t UART1_rxBuffer[UART1_RXBUFFER_SIZE];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_USART2_UART_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
-//extern void initialise_monitor_handles(void);
+extern void initialise_monitor_handles(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -96,7 +97,7 @@ static void MX_TIM1_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	//initialise_monitor_handles(); // for semihosting facility
+	initialise_monitor_handles(); // for semihosting facility
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -117,18 +118,19 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART2_UART_Init();
   MX_TIM1_Init();
+  MX_USART1_UART_Init();
+  //MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart2, UART2_rxBuffer, UART2_RXBUFFER_SIZE); // ready to receive from UART with interrupt
+  HAL_UART_Receive_IT(&huart1, UART1_rxBuffer, UART1_RXBUFFER_SIZE); // ready to receive from UART with interrupt
   /* USER CODE END 2 */
-
+  uint8_t bufProva[4] = "ciao";
+  HAL_UART_Transmit_IT(&huart1, bufProva, UART1_TXBUFFER_SIZE);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -223,37 +225,47 @@ static void MX_TIM1_Init(void)
 }
 
 /**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_USART2_UART_Init(void)
-{
 
-  /* USER CODE BEGIN USART2_Init 0 */
-
-  /* USER CODE END USART2_Init 0 */
-
-  /* USER CODE BEGIN USART2_Init 1 */
-
-  /* USER CODE END USART2_Init 1 */
-  huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
-  huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  huart2.Init.StopBits = UART_STOPBITS_1;
-  huart2.Init.Parity = UART_PARITY_NONE;
-  huart2.Init.Mode = UART_MODE_TX_RX;
-  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart2) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN USART2_Init 2 */
 
   /* USER CODE END USART2_Init 2 */
-
-}
 
 /**
   * @brief GPIO Initialization Function
@@ -271,20 +283,20 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : B1_Pin */
-  GPIO_InitStruct.Pin = B1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD2_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin;
+  /*Configure GPIO pin : PA5 */
+  GPIO_InitStruct.Pin = GPIO_PIN_5;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
@@ -295,11 +307,12 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+	printf("ciao ho trasmesso\n");
 	__NOP();
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	switch (UART_ParseRxCommand(UART2_rxBuffer)) {
+	switch (UART_ParseRxCommand(UART1_rxBuffer)) {
 		case TURN_LED_OFF:
 			if (isLEDOn && !isMeasuring) {
 				isLEDOn = 0;
@@ -319,7 +332,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		default: // ignore the invalid command
 			break;
 	}
-	HAL_UART_Receive_IT(&huart2, UART2_rxBuffer, UART2_RXBUFFER_SIZE); // ready to receive from UART with interrupt
+	HAL_UART_Receive_IT(&huart1, UART1_rxBuffer, UART1_RXBUFFER_SIZE); // ready to receive from UART with interrupt
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
@@ -331,9 +344,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	__HAL_TIM_SET_COUNTER(&htim1, 0);
 	if (isMeasuring) {
 		sprintf(txBuf_tmp, "T%04X", cnt);
-		mem_StrCpy(UART2_txBuffer, txBuf_tmp, UART2_TXBUFFER_SIZE);
+		mem_StrCpy(UART1_txBuffer, txBuf_tmp, UART1_TXBUFFER_SIZE);
 		isMeasuring = 0;
-		HAL_UART_Transmit_IT(&huart2, UART2_txBuffer, UART2_TXBUFFER_SIZE);
+		HAL_UART_Transmit_IT(&huart1, UART1_txBuffer, UART1_TXBUFFER_SIZE);
 	}
 }
 
