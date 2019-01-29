@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  16 JAN 2019 09:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  29 JAN 2019 23:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1062,9 +1062,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
-Overfull \hbox (6.02046pt too wide) in paragraph at lines 53--62
-\OT1/cmr/m/n/10 cazione via se-ri-ale e le al-tre fun-zioni di lib.py de-lay[]c
-md() e t[]score[]byte[]object[]conversion[]to[]seconds
+Overfull \hbox (1.28786pt too wide) in paragraph at lines 53--62
+\OT1/cmr/m/n/10 cazione via se-ri-ale e le al-tre fun-zioni di \OT1/cmr/m/it/10
+ lib.py de-lay[]cmd() \OT1/cmr/m/n/10 e \OT1/cmr/m/it/10 t[]score[]byte[]object
+[]conversion[]to[]seconds
  []
 
 [2]
@@ -1080,59 +1081,59 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 70.
  [3] [4]
-Overfull \hbox (0.57883pt too wide) in paragraph at lines 125--126
+Overfull \hbox (0.57883pt too wide) in paragraph at lines 126--127
 []\OT1/cmr/m/n/10 La fun-zione call-back di fine trasmis-sione pu^^Ro non fare 
 nulla ed ^^Re im-ple-men-tata con una $[][]\OML/cmm/m/it/10 NOP\OT1/cmr/m/n/10 
 ()$. 
  []
 
-[5] <img/terminal.png, id=114, 387.4475pt x 134.5025pt>
+[5] <img/terminal.png, id=117, 387.4475pt x 134.5025pt>
 File: img/terminal.png Graphic file (type png)
  <use img/terminal.png>
-Package pdftex.def Info: img/terminal.png used on input line 145.
+Package pdftex.def Info: img/terminal.png used on input line 146.
 (pdftex.def)             Requested size: 290.5849pt x 100.8766pt.
 
-<img/GUI.png, id=115, 947.54pt x 656.4525pt>
+<img/GUI.png, id=118, 947.54pt x 656.4525pt>
 File: img/GUI.png Graphic file (type png)
  <use img/GUI.png>
-Package pdftex.def Info: img/GUI.png used on input line 154.
+Package pdftex.def Info: img/GUI.png used on input line 155.
 (pdftex.def)             Requested size: 331.64397pt x 229.76181pt.
  [6 </home/matteo/git/ise_gr09_lab07/report/img/terminal.png>]
-<img/save.png, id=124, 428.60126pt x 266.9975pt>
+<img/save.png, id=125, 428.60126pt x 266.9975pt>
 File: img/save.png Graphic file (type png)
  <use img/save.png>
-Package pdftex.def Info: img/save.png used on input line 161.
+Package pdftex.def Info: img/save.png used on input line 162.
 (pdftex.def)             Requested size: 150.01268pt x 93.45052pt.
 
-<img/leaderboard.png, id=125, 507.8975pt x 431.6125pt>
+<img/leaderboard.png, id=126, 507.8975pt x 431.6125pt>
 File: img/leaderboard.png Graphic file (type png)
 
 <use img/leaderboard.png>
-Package pdftex.def Info: img/leaderboard.png used on input line 168.
+Package pdftex.def Info: img/leaderboard.png used on input line 169.
 (pdftex.def)             Requested size: 177.76678pt x 151.06664pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 172--173
+Underfull \hbox (badness 10000) in paragraph at lines 173--174
 
  []
 
 [7 </home/matteo/git/ise_gr09_lab07/report/img/GUI.png> </home/matteo/git/ise_g
 r09_lab07/report/img/save.png> </home/matteo/git/ise_gr09_lab07/report/img/lead
 erboard.png>] [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 179.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 179.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 180.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 180.
  (/home/matteo/git/ise_gr09_lab07/report/ISE_lab07.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 179.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 179.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 180.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 180.
 Package rerunfilecheck Info: File `ISE_lab07.out' has not changed.
 (rerunfilecheck)             Checksum: 7D3370EFF1118C648A869E99ADE1CF08;1045.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 179.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 180.
  ) 
 Here is how much of TeX's memory you used:
- 27277 strings out of 493029
- 540654 string characters out of 6136233
+ 27278 strings out of 493029
+ 540664 string characters out of 6136233
  571410 words of memory out of 5000000
  30357 multiletter control sequences out of 15000+600000
- 20547 words of font info for 77 fonts, out of 8000000 for 9000
+ 20906 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,11n,56p,10381b,784s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1147,10 +1148,10 @@ c/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmti10.pfb>
 Output written on /home/matteo/git/ise_gr09_lab07/report/ISE_lab07.pdf (8 pages
-, 250288 bytes).
+, 256860 bytes).
 PDF statistics:
- 190 PDF objects out of 1000 (max. 8388607)
- 160 compressed objects within 2 object streams
- 42 named destinations out of 1000 (max. 500000)
+ 192 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
+ 43 named destinations out of 1000 (max. 500000)
  161 words of extra memory for PDF output out of 10000 (max. 10000000)
 
