@@ -83,7 +83,7 @@ static void MX_GPIO_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
-//extern void initialise_monitor_handles(void);
+extern void initialise_monitor_handles(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -97,7 +97,7 @@ static void MX_USART1_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-//	initialise_monitor_handles(); // for semihosting facility
+	initialise_monitor_handles(); // for semihosting facility
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -130,6 +130,7 @@ int main(void)
   {
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
+	  PRINT_SEMIHOSTING("Funziono!");
   }
   /* USER CODE END 3 */
 }
@@ -305,6 +306,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+	printf("ciao ho trasmesso\n");
 	__NOP();
 }
 
