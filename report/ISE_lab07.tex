@@ -126,9 +126,11 @@ Il programma C deve permettere al microcontrollore di ricevere dati da seriale, 
 		La funzione callback di fine trasmissione può non fare nulla ed è implementata con una \textbf{$\_\_NOP()$}.
 
 	\subsection{Test e debug}
-		Ogni periferico è stato testato singolarmente prima che venisse assemblato il programma. Il debug è stato eseguito mediante l'utilizzo della printf grazie alla modalità di semihosting; essa è stata implementata in una macro che riceve in ingresso una stringa che viene passata ad una printf ma con l'aggiunta di un carattere '\\n' finale. Come riportato sul sito della ST questa è una condizione necessaria per il corretto funzionamento del semihosting stesso. 
+		Ogni periferico è stato testato singolarmente prima che venisse assemblato il programma. Il debug è stato eseguito mediante l'utilizzo della printf grazie alla modalità di semihosting; essa è stata implementata in una macro che riceve in ingresso una stringa che viene passata ad una printf ma con l'aggiunta di un carattere '\\n' finale. Come riportato sul sito della ST questa è una condizione necessaria per il corretto funzionamento del semihosting stesso.
 
-		I comandi sono stati inviati e ricevuti da PC per mezzo del programma minicom.
+		Per testare la seriale è stato utilizzato il programma minicom per inviare e ricevere caratteri.
+
+		E' importante sottolineare come sia possibile accedere alla seriale ttyUSB0 solo se il file corrispondente non risulta bloccato per mancanza di permessi. Prima dell'esecuzione è necessario quindi assicurarsi che non ci siano restrizioni particolari sul file.
 \section{Extra: la Leaderboard}
 		Una volta aver soddisfatto le specifiche e testato in modo soddisfacente il sistema si è deciso di aggiungere una \textit{feature} extra alla parte "front end" del progetto e permettere all'utente di salvare il proprio \textit{score} in una leaderboard, la cui lunghezza può essere scelta all'interno del file \textit{constants.py}. \newline
 		Al fine di implementare una classifica, accessibile e gestita mediante il programma, alcune modifiche sono state effettuate al codice e all'interfaccia grafica per:
