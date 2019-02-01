@@ -25,7 +25,7 @@
 \newpage
 
 \begin{abstract}
-	E' stato creato un sistema che si compone di due parti: un programma Python che viene eseguito da PC e un programma C caricato e fatto girare su scheda NUCLEO-F401RE. La comunicazione tra i due dispositivi avviene mediante un cavo USB che emula una seriale. 
+	E' stato creato un sistema che si compone di due parti: un programma Python che viene eseguito da PC e un programma C caricato e fatto girare su scheda NUCLEO-F401RE. La comunicazione tra i due dispositivi avviene mediante un cavo USB-seriale TTL-232R-3v3. 
 	Il debug è stato eseguito grazie alla modalità di SEMIHOSTING che ha permesso il reindirizzamento dello std-output dal processore ARM Cortex M4 passando per il debugger/loader ST-LINK fino al PC.\newline
 	La seguente relazione spiega i passi operativi in ordine temporale che hanno portato al progetto così come consegnato. La versione finale verrà descritta solo al capitolo 4
 \end{abstract}
@@ -34,7 +34,7 @@
 Le specifiche sono disponibili nel documento "lab07.pdf". Di seguito verranno chiarite le specifiche non definite:
 \begin{enumerate}
 	\item Qualora venga inviato un comando di accensione LED mentre esso è già acceso, il comando viene considerato non valido e semplicemente ignorato. Stessa cosa se il comando chiede di spegnere un LED già spento.
-	\item E' necessario che dal PC i comandi arrivino nel formato corretto. Non devono essere inviati comandi più lunghi di due caratteri.
+	\item E' necessario che dal PC i comandi arrivino nel formato corretto.
 	\item Per ottenere un risultato corretto è indispensabile non attendere per più di 65 secondi dopo l'accensione/spegnimento del LED prima di premere il pulsante.
 \end{enumerate}
 
